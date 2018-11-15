@@ -1,0 +1,72 @@
+CO323 Assessment 3 - Databases
+reh41
+
+# 1
+SELECT COUNT(status)
+FROM transcript
+WHERE status = "KNOWN";
+#======================
+
+#1
+SELECT COUNT(*)
+FROM transcript
+WHERE status = "KNOWN";
+#======================
+
+# 2
+SELECT description
+FROM gene
+WHERE gene_id = "9240";
+#=======================
+
+# 3
+SELECT COUNT(length*sequence)
+FROM seq_region s,dna
+WHERE s.seq_region_id <200;
+#============================
+
+# 3
+SELECT SUM(length)
+FROM seq_region s
+WHERE s.seq_region_id <200;
+#============================
+
+# 4
+SELECT DISTINCT d.sequence
+FROM dna d, seq_region s
+WHERE s.name = "contig_39273";
+#=============================
+
+# 4
+SELECT DISTINCT d.sequence
+FROM dna d JOIN seq_region s
+ON d.seq_region_id = s.seq_region_id
+WHERE s.name = "contig_39273";
+#=================================
+
+# 5
+SELECT MAX(t.end_exon_id)
+FROM translation t 
+JOIN transcript tt ON tt.transcript_id = t.transcript_id
+WHERE t.translation_id <200
+AND tt.status = "novel";
+#==================================
+
+#5
+SELECT MAX(end_exon_id)
+FROM translation, transcript
+WHERE translation_id <200
+AND status = "NOVEL"
+AND translation.transcript_id = transcript.transcript_id;
+#========================================================
+
+# 6
+SELECT g.gene_id, s.length
+FROM gene g 
+JOIN seq_region s ON g.seq_region_id = s.seq_region_id
+JOIN transcript tt ON tt.gene_id = g.gene_id
+JOIN translation t ON t.transcript_id = tt.transcript_id
+WHERE t.end_exon_id = "77777";
+#======================================================
+
+ 

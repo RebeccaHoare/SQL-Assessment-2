@@ -1,0 +1,43 @@
+CO323 ASEESASSMENT 3 - DATABASES
+reh41
+
+# 1
+SELECT COUNT(*)
+FROM transcript
+WHERE status = "KNOWN";
+#======================
+
+# 2
+SELECT description
+FROM gene
+WHERE gene_id = "9240";
+#=======================
+
+# 3
+SELECT SUM(length)
+FROM seq_region s
+WHERE s.seq_region_id <200;
+#============================
+
+# 4
+SELECT DISTINCT d.sequence
+FROM dna d JOIN seq_region s
+ON d.seq_region_id = s.seq_region_id
+WHERE s.name = "contig_39273";
+#=================================
+
+# 5
+SELECT MAX(t.end_exon_id)
+FROM translation t 
+JOIN transcript tt ON tt.transcript_id = t.transcript_id
+WHERE tt.status = "NOVEL" AND t.translation_id <200;
+#==================================
+
+# 6
+SELECT s.length, g.gene_id
+FROM gene g 
+JOIN transcript tt ON tt.gene_id = g.gene_id
+JOIN translation t ON t.transcript_id = tt.transcript_id
+JOIN seq_region s ON g.seq_region_id = s.seq_region_id
+WHERE t.end_exon_id = "77777";
+#====================================================== 
